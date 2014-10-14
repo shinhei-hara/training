@@ -1,0 +1,342 @@
+<html>
+<head>
+<title>JSの練習。</title>
+<script type="text/javascript">
+var p38a = function(x,y){
+	var result = "";
+	result = x * y ;
+	return result;
+};
+var p38b = function(name){
+	var str = name + "ちゃん";
+	return str;
+};
+var p49c = function(n){
+	var result ="";
+	for(i=0 ; i < n ;i++){
+		result = result + n;
+	}
+	return result;
+};
+var p49d = function(n){
+	var denominator = 1;
+	for(i=0 ; i < n ;i++){
+		denominator = denominator / 2;
+		result = result + denominator;
+	}
+	return result;
+};
+var p56e = function(n){
+	var result = "";
+	if(n % 2 == 0){
+		// 偶数
+		return "even";
+	} else {
+		// 奇数
+		return "odd";
+	}
+	return result;
+};
+var p56f = function(n){
+	if(n < 10){
+		return "small";
+	} else if (n >= 10 && n < 100) {
+		return "midium";
+	} else if (n >= 100) {
+		return "hige";
+	} else {
+		return "unknown";
+	}
+};
+var p56g = function(x){
+	var i = 1 ;
+	var result = [];
+	while( i < x){
+		if(i % 2 != 0 && i % 3 != 0 ){
+			result.push(i);
+			i++;
+			continue;
+		}
+		i++;
+	} 
+	return result;
+};
+
+var p87h = function(f, n){
+debugger;
+	var result = [];
+	for (var i = 0; i < n ; i++){
+		result.push(f())
+	}
+	return result;
+};
+function calc1(){
+	var htmlText = "";
+	var result = p56g(100);
+	for (i = 0,max =  result.length ; i < max ; i++){
+		htmlText = htmlText + "," + result[i];
+	}
+	document.getElementById("test").textContent =  htmlText ;
+};
+function aa(){
+	var obj = {
+		color : 'red',
+		size : 10,
+		friends : ['taro','jiro']
+	}
+	obj.friends[2] = 'saburo';
+};
+
+function highLayer1(){
+	var n = document.getElementById("valueN").value;
+	if(n == "" || n == "undifined" || n == null){
+		alert("入力して！！！！");
+		return;
+	}
+	var result2 = p87h(function(x){return "☆彡"}, n);
+	document.getElementById("result2").textContent = result2;
+};
+function fotune(){
+	var num = Math.random();
+	num = num * 10;
+	var result3 = "";
+	if(num >= 0 && num < 1){
+		result3 = "大吉";
+	} else if (num >= 1 && num < 5) {
+		result3 = "吉";
+	} else {
+		result3 = "凶";
+	}
+	document.getElementById("result3").textContent = "今日の運勢は　" + result3 + "　！！";
+};
+function check(){
+	var days = document.getElementById("manth").value;
+	var nedan = document.getElementById("nedan").value;
+	document.getElementById("result4").textContent = (days * nedan) +  "円！！";
+};
+function countdown(){
+	var now = new Date();
+	var newYearEve = new Date(now.getFullYear(),12,31);
+	var times = newYearEve - now;
+	var dates = times / 86400000 ; //1日(86400000ミリ秒)で割る
+	document.getElementById("result5").textContent = "年末まであと" + Math.ceil(dates) +  "日！！";
+};
+function reverse(){
+debugger;
+	var str = String(document.getElementById("reverseText").value);
+	if(str == "" || str == "undifined" || str == null){
+		alert("入力して！！！！");
+		return;
+	}
+	var strList = [];
+	for( i=0, j= str.length ,max = str.length; i < max ; i++,j--){
+		strList[j] = str.substr(i,1);
+	}
+	var result6 = "";
+	for( i=1,max = strList.length; i < max ; i++){
+		result6 = result6 + strList[i];
+	}
+	document.getElementById("result6").textContent =  result6 ;
+};
+var reduce = function(f, array) {
+	var val;
+	if(array[0] != undefined) {
+		val = array[0];
+	} else {
+		return undefined;
+	}
+	for(var i = 1, max = array.length; i < max; i++) {
+		val = f(val, array[i]);
+	}
+	return val;
+};
+var conpare = function(x,y){
+				x = parseInt(x,10);
+				y = parseInt(y,10);
+				if(x > y) {
+					return x;
+				} else {
+					return y;
+				}
+			};
+var sum = function(x,y){
+				return x + y;
+			};
+function calc2(){
+debugger;
+	var str = String(document.getElementById("checkText").value);
+	if(str == "" || str == "undifined" || str == null){
+		alert("入力して！！！！");
+		return;
+	}
+	var strList = str.split(",");
+	var max = reduce(conpare,strList);
+	var average = reduce(sum,strList) / strList.length;
+	document.getElementById("result7").textContent = "最大値：" + max + "\n平均値：" + average ;
+};
+function inCheck(){
+	var str = String(document.getElementById("kana").value);
+	var boin = ["あ","い","う","え","お"];
+	var result8 = false;
+	for(var i = 0; i < boin.length; i++){
+		if( str === boin[i]){
+			result8 = true;
+		}
+	}
+	document.getElementById("result8").textContent = result8 ;
+};
+var conpareLen = function(x,y){
+				xlen = x.length;
+				ylen = y.length;
+				if(xlen > ylen) {
+					return x;
+				} else {
+					return y;
+				}
+			};
+function longLength(){
+	var str = String(document.getElementById("lengthlist").value);
+	if(str == "" || str == "undifined" || str == null){
+		alert("入力して！！！！");
+		return;
+	}
+	var strList = str.split(",");
+	var result9 = reduce(conpareLen,strList);
+	document.getElementById("result9").textContent = result9 ;
+};
+function encountString(){
+debugger;
+	var str = String(document.getElementById("EST").value);
+	if(str == "" || str == "undifined" || str == null){
+		alert("入力して！！！！");
+		return;
+	}
+	var strList = {};
+	var propertyList = new Object();
+	for( i = 0, max = str.length; i < max ; i++){
+		strList[i] = str.substr(i,1);
+	}
+	var firstStr = strList[0];
+	if(firstStr != "" && firstStr != "undifined" && firstStr != null){
+		var objList = [];
+		for( i = 0, max = strList.length ; i < max ; i++){
+			objList.strList[i] = 1 ;
+		}
+	}
+	var result10 = "<ul>";
+	result10 = result10 + "</ul>";
+	document.getElementById("result10").innerHTML = result10 ;
+};
+</script>
+</head>
+<body>
+	<table width="600" border="solid 2px #000000">
+		<tr>
+			<th width="200">内容</th>
+			<th width="50">実行</th>
+			<th width="200">結果</th>
+		</tr>
+		<tr>
+			<td width="200">２と３で割り切れない数字をかえす</td>
+			<td width="50"><input type="button" value="計算" onclick="calc1();"></td>
+			<td width="200"><div id="test"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				関数f(x)と自然数nを引数に取り、fをn回xに適用する関数を返す高階関数
+				</br>
+				N(数値):<input type="text" id="valueN" maxlength="5">
+			</td>
+			<td width="50px"><input type="button" value="計算" onclick="highLayer1();"></td>
+			<td width="200px"><div id="result2"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				おみくじ
+			</td>
+			<td width="50px"><input type="button" value="運試し" onclick="fotune();"></td>
+			<td width="200px"><div id="result3"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				毎日出費したらこれだけになるよ
+				</br>
+				N(数値):<input type="text" id="nedan" maxlength="50" value="100">円</br>
+				何月：
+				<select id="manth">
+					<option value="31">1月</option>
+					<option value="28">2月</option>
+					<option value="29">2月(閏)</option>
+					<option value="31">3月</option>
+					<option value="30">4月</option>
+					<option value="31">5月</option>
+					<option value="30">6月</option>
+					<option value="31">7月</option>
+					<option value="31">8月</option>
+					<option value="30">9月</option>
+					<option value="31">10月</option>
+					<option value="30">11月</option>
+					<option value="31">12月</option>
+				</select>
+			</td>
+			<td width="50px"><input type="button" value="計算" onclick="check();"></td>
+			<td width="200px"><div id="result4"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				年末までのカウントダウン
+				</br>
+				<span style="font-size:8pt;">(※うるう年は…考えてない)</style>
+				</br>
+			</td>
+			<td width="50px"><input type="button" value="何日？" onclick="countdown();"></td>
+			<td width="200px"><div id="result5"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				逆から読むと…
+				</br>
+				文字:<input type="text" id="reverseText" maxlength="15">
+			</td>
+			<td width="50px"><input type="button" value="逆転" onclick="reverse();"></td>
+			<td width="200px"><div id="result6"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				カンマ区切りの数値の中から最大値と平均値を返す(例：1,20,9,8,1,0)
+				</br>
+				数値:<input type="text" id="checkText" maxlength="50">
+			</td>
+			<td width="50px"><input type="button" value="最大" onclick="calc2();"></td>
+			<td width="200px"><div id="result7"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				ひらがなを一文字入力してください
+				</br>
+				<input type="text" id="kana" maxlength="1">
+			</td>
+			<td width="50px"><input type="button" value="最大" onclick="inCheck();"></td>
+			<td width="200px"><div id="result8"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				一番長い文字列を返します。
+				</br>
+				<input type="text" id="lengthlist" maxlength="50" value="エリンギ,サーロインステーキ,フォアグラ,キャビア,カレー">
+			</td>
+			<td width="50px"><input type="button" value="押す" onclick="longLength();"></td>
+			<td width="200px"><div id="result9"></div></td>
+		</tr>
+		<tr>
+			<td width="200px">
+				文字の頻度。(実装中)
+				</br>
+				<input type="text" id="EST" maxlength="50">
+			</td>
+			<td width="50px"><!--<input type="button" value="押す" onclick="encountString();">--></td>
+			<td width="200px"><div id="result10"></div></td>
+		</tr>
+	</table>
+</body>
+</html>
