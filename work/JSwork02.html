@@ -1,0 +1,143 @@
+<html>
+<head>
+<script type="text/javascript">
+<!--
+// ■素数計算
+var Closure = function(){
+	var primeList = [];
+	var isNotPrimeNumber = true;
+	var checkPrime = function(checkNum){
+		var count = 0;
+		var result = false;
+		for (var i = 2; i <= checkNum ; i++) {
+			if (checkNum % i == 0) {
+				count++;
+			}
+		}
+		if (count <= 1) {
+			result =  true;
+		}
+		return result;
+	};
+	return function(){
+		// ここで判定式
+		if( primeList.length == 0){
+			// 1番目を設定
+			primeList.push(2);
+			return primeList;
+		} else {
+			var val = primeList[primeList.length -1] +1 ;
+			// 基準値(わかっている最大素数)の次の素数を判定
+			while(!checkPrime(val)){
+				val++;
+			}
+			primeList.push(val);
+			return val;
+		}
+	};
+};
+var prime = Closure();
+function executePrime(){
+debugger;
+	document.getElementById("text").innerText = prime();
+};
+
+// ■頻度を調べる関数。
+var checkFreaquency = function(){
+	// 取得した文字列をリスト化する
+	var strList = [];
+	var inputTextVal = document.getElementById("inputText").value;
+	for(var i = 0; i < inputTextVal.length ; i++){
+		strList[i] = inputTextVal.substr(i,1);
+	}
+	// 一文字目をマップに詰める
+	var resList = [];
+	var strCount = counterClosure(0);
+	// マップに存在しなかったら新しく詰める
+	for(var i = 0; i < strList.length ; i++ ){
+		var key = strList[strCount()];
+		if(resList[key] == null ){
+			// なかったら新しく登録
+			resList[key] = 1;
+		} else {
+			// 存在していたらカウントアップする
+			resList[key] = resList[key] + 1;
+		}
+	}
+	// 返却
+	return checkObject(resList);;
+};
+function checkObject(_obj){
+	var returnText;
+	for(var key in _obj){
+		returnText = key + " : " + _obj[key]  + "   ";
+	}
+	return returnText;
+};
+// 文字の頻度を調べる
+function frequency(){
+debugger;
+	document.getElementById("resultFrequency").innerText = checkFreaquency();
+};
+
+
+
+// ■円(半径rと中心座標(x, y))を表現するクラスCircle(p18)
+var Circle = function(r,x,y){
+	this.r = r;
+	this.x = x;
+	this.y = y;
+};
+// 面積
+Circle.prototype.area = function(){
+		return (( r * r ) * 3.14) ;
+};
+// 円周長
+Circle.prototype.circumference = function(){
+	return (( r * 2 ) * 3.14);
+};
+// 重なり
+Circle.prototype.layer = function(otherCircle){
+	if( ((this.x - otherCircle.x) * (this.x - otherCircle.x)) + ((this.y - otherCircle.y) * (this.y - otherCircle.y)) <= this.r + otherCircle.r ){
+		return true;
+	} else {
+		return false;
+	}
+};
+
+// ■即時関数を利用して1から整数をカウントする(p25)
+var integer = {};
+(function(){
+	var num = 1;
+	integer.count = function(){
+		return num++;
+	}
+})();
+
+alert(integer.count() + "\r\n" + integer.count() + "\r\n" + integer.count());
+
+// -->
+</script>
+</head>
+
+<body>
+■closure：素数を2から順に返す
+<input type="button" value="push" onclick="executePrime()">
+<div id="text"></div>
+
+</br></br>
+■文字の頻度をobjectで出力する
+<input type="text" id="inputText">
+<input type="button" value="push" onclick="frequency()">
+<div id="resultFrequency"></div>
+
+</br></br>
+■円(半径rと中心座標(x, y))を表現するクラスCircle
+</br></br>
+■1からカウントする即時関数のパターン
+
+
+</body>
+
+
+</html>
